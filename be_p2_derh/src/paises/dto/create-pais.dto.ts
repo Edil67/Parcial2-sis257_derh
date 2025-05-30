@@ -1,12 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsDefined,
-  IsInt,
-  IsNotEmpty,
-  IsString,
-  MaxLength,
-} from 'class-validator';
-import { Pais } from '../entities/pais.entity';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreatePaisDto {
   @ApiProperty()

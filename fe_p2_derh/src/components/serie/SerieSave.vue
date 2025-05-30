@@ -5,7 +5,9 @@ import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
+import InputNumber from 'primevue/inputnumber'
+import Select from 'primevue/select'
+import Calendar from 'primevue/calendar'
 import { computed, onMounted, ref, watch } from 'vue'
 
 const ENDPOINT = 'series'
@@ -27,6 +29,14 @@ const dialogVisible = computed({
 })
 
 const paises = ref<Pais[]>([])
+
+const idiomas = [
+  { label: 'Español', value: 'Español' },
+  { label: 'Inglés', value: 'Inglés' },
+  { label: 'Francés', value: 'Francés' },
+  { label: 'Portugués', value: 'Portugués' },
+  { label: 'Chino', value: 'Chino'},
+]
 
 async function cargarPaises() {
   paises.value = await http.get('paises').then((res) => res.data)
@@ -51,6 +61,7 @@ async function handleSave() {
       titulo: serie.value.titulo,
       sinopsis: serie.value.sinopsis,
       director: serie.value.director,
+      idiomaPrincipal: serie.value.idiomaPrincipal,
       temporadas: serie.value.temporadas,
       fecha_estreno: serie.value.fecha_estreno,
     }
@@ -77,7 +88,7 @@ async function handleSave() {
     >
       <div class="flex items-center gap-4 mb-4">
         <label for="id_pais" class="font-semibold w-3">País</label>
-        <Dropdown
+        <Select
           id="id_pais"
           v-model="serie.id_pais"
           :options="paises"
@@ -106,8 +117,20 @@ async function handleSave() {
         <InputText id="director" v-model="serie.director" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex items-center gap-4 mb-4">
+        <label for="idiomaPrincipal" class="font-semibold w-3">Idioma Principal</label>
+        <Select
+          id="idiomaPrincipal"
+          v-model="serie.idiomaPrincipal"
+          :options="idiomas"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Seleccione un idioma"
+          class="flex-auto"
+        />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
         <label for="temporadas" class="font-semibold w-3">Temporadas</label>
-        <InputText
+        <InputNumber
           id="temporadas"
           v-model.number="serie.temporadas"
           class="flex-auto"
@@ -116,7 +139,7 @@ async function handleSave() {
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="fecha_estreno" class="font-semibold w-3">Fecha de estreno</label>
-        <InputText
+        <Calendar
           id="fecha_estreno"
           type="date"
           v-model="serie.fecha_estreno"

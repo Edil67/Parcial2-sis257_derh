@@ -10,13 +10,16 @@ const serieEdit = ref<any>(null)
 
 function handleCreate() {
   serieEdit.value = {
-    fecha_estreno: new Date().toISOString().slice(0, 10),
+    fecha_estreno: new Date().toISOString().split('T')[0],
   }
   mostrarDialog.value = true
 }
 
 function handleEdit(serie: any) {
   serieEdit.value = serie
+  serieEdit.value.fecha_estreno = new Date(serieEdit.value.fecha_estreno)
+    .toISOString()
+    .split('T')[0]
   mostrarDialog.value = true
 }
 

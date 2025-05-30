@@ -1,10 +1,11 @@
-import type { Pais } from "./pais"
+import type { Pais } from './pais'
 
 export interface Serie {
   id: number
   titulo: string
   sinopsis: string
   director: string
+  idiomaPrincipal: string
   temporadas: number
   fecha_estreno: Date
   pais: Pais

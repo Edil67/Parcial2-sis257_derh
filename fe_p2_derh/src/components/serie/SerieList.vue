@@ -21,7 +21,8 @@ const seriesFiltrados = computed(() => {
     (serie) =>
       serie.titulo.toLowerCase().includes(busqueda.value.toLowerCase()) ||
       serie.sinopsis.toLowerCase().includes(busqueda.value.toLowerCase()) ||
-      serie.director.toLowerCase().includes(busqueda.value.toLowerCase()),
+      serie.director.toLowerCase().includes(busqueda.value.toLowerCase()) ||
+      serie.idiomaPrincipal.toLowerCase().includes(busqueda.value.toLowerCase()),
   )
 })
 
@@ -64,6 +65,7 @@ defineExpose({ obtenerLista })
           <th>Temporadas</th>
           <th>Sinopsis</th>
           <th>País</th>
+          <th>Idioma Principal</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -75,7 +77,8 @@ defineExpose({ obtenerLista })
           <td>{{ serie.fecha_estreno.split('T')[0] }}</td>
           <td>{{ serie.temporadas }}</td>
           <td>{{ serie.sinopsis }}</td>
-          <td>{{ serie.pais ? serie.pais.descripcion : serie.id_pais }}</td>
+          <td>{{ serie.pais ? serie.pais.descripcion : '' }}</td>
+          <td>{{ serie.idiomaPrincipal }}</td>
           <td>
             <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(serie)" />
             <Button

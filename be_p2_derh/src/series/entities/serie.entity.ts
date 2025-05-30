@@ -6,7 +6,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -27,6 +26,9 @@ export class Serie {
 
   @Column('varchar', { length: 100 })
   director: string;
+
+  @Column('varchar', { length: 50 })
+  idiomaPrincipal: string;
 
   @Column('integer')
   temporadas: number;

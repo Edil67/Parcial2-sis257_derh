@@ -20,6 +20,7 @@ export class SeriesService {
       titulo: createSerieDto.titulo.trim(),
       director: createSerieDto.director.trim(),
       id_pais: createSerieDto.id_pais,
+      idiomaPrincipal: createSerieDto.idiomaPrincipal.trim(),
     });
 
     if (existe) throw new ConflictException('La serie ya existe');
@@ -29,6 +30,7 @@ export class SeriesService {
     serie.id_pais = createSerieDto.id_pais;
     serie.sinopsis = createSerieDto.sinopsis.trim();
     serie.director = createSerieDto.director.trim();
+    serie.idiomaPrincipal = createSerieDto.idiomaPrincipal.trim();
     serie.temporadas = createSerieDto.temporadas;
     serie.fecha_estreno = createSerieDto.fecha_estreno;
     return this.seriesRepository.save(serie);
@@ -42,6 +44,7 @@ export class SeriesService {
         titulo: true,
         sinopsis: true,
         director: true,
+        idiomaPrincipal: true,
         temporadas: true,
         fecha_estreno: true,
       },
